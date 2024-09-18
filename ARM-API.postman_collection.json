@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "8e04fad4-3f04-49b5-a183-64a1868f4511",
+		"name": "ARM-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "359079"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rose\",\n    \"email\": \"rose@email.com\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:9090/api/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"janeEdit\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "thin",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjY0NzQwMywiZXhwIjoxNzI2NjUxMDAzfQ.0WlRZaxZS3eD5deTQ81z6zLtJ7Abn6qdyXU3GOfJ7AU"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:8081/api/users"
+			},
+			"response": []
+		},
+		{
+			"name": "user_role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lRWRpdCIsImlhdCI6MTcyNjY0NzU5NiwiZXhwIjoxNzI2NjUxMTk2fQ.lWb-g8rbG0LcyN0lhTfBq921RqrbmQGd_qKej_JS4jc"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:8081/api/main/admin"
+			},
+			"response": []
+		},
+		{
+			"name": "get_user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NlIiwiaWF0IjoxNzI2NjQwMDc0LCJleHAiOjE3MjY2NDM2NzR9.6z78UjHwB1YdqUzD-kCH1MNrUAlvfUfKKxHJctRhHLU"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NlIiwiaWF0IjoxNzI2NjM2NDE1LCJleHAiOjE3MjY2NDAwMTV9.1SsYt5TP_d8Q4hTQH0IJK6E1sf7ggbJC5WDf02aBHh8 ",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8081/api/users/b98d872e-8ec6-4222-a321-eb3cb756e192"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjY0NzQwMywiZXhwIjoxNzI2NjUxMDAzfQ.0WlRZaxZS3eD5deTQ81z6zLtJ7Abn6qdyXU3GOfJ7AU"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"janeEdit\",\n    \"password\": \"password\",\n    \"email\": \"jane@email.com\",\n    \"roles\": [\n            {\n                \"id\": \"cce74265-7fd2-4f7e-a3b9-4dd6deb07e2f\"\n            },\n            {\n                \"id\": \"96f06586-9db1-4a4c-8948-8a4a24122f7e\"\n            }\n        ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/users/b98d872e-8ec6-4222-a321-eb3cb756e192"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NlIiwiaWF0IjoxNzI2NjM2NDE1LCJleHAiOjE3MjY2NDAwMTV9.1SsYt5TP_d8Q4hTQH0IJK6E1sf7ggbJC5WDf02aBHh8 ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rose_mu\",\n    \"password\": \"newpassword123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:9090/api/users/4c893756-2572-4c43-b353-22388923172d"
+			},
+			"response": []
+		}
+	]
+}

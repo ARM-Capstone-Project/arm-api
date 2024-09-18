@@ -1,0 +1,12 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/armDB
+    username: admin
+    password: admin
+
+server:
+  error:
+    path: /error
