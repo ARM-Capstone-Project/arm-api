@@ -6,13 +6,18 @@ import com.alco.armapi.common.PersistenceAdapter;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleRepository;
+import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
+import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneRepository;
 import com.alco.armapi.infrastructure.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,6 +33,8 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     PasswordEncoder encoder;
 
     public static final String ERROR_ROLE_NOT_FOUND = "Error: Role is not found.";
+    @Autowired
+    private ZoneRepository zoneRepository;
 
 
     @Override
@@ -42,6 +49,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public User getUserById(String userId){
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+//        List<ZoneEntity> zoneEntities = zoneRepository.findByUsers_Id(userId);
+//        if (!zoneEntities.isEmpty()) {
+//            userEntity.setZones(new HashSet<>(zoneEntities));
+//        }
         return UserMapper.INSTANCE.toDomainModel(userEntity);
     }
 
@@ -84,9 +96,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         existingUserEntity.setEmail(isNotEmpty(user.getEmail()) ? user.getEmail() : existingUserEntity.getEmail());
         existingUserEntity.setPassword(isNotEmpty(user.getPassword()) ? encoder.encode(user.getPassword()) : existingUserEntity.getPassword());  // Ensure password is encoded if provided
 
-        existingUserEntity.setRoles(user.getRoles() != null && !user.getRoles().isEmpty() ?
-                user.getRoles().stream().map(role -> new RoleEntity(role.getId(), role.getName(), role.getDescription())).collect(Collectors.toSet())
-                : existingUserEntity.getRoles());
+//        existingUserEntity.setRoles(user.getRoles() != null && !user.getRoles().isEmpty() ?
+//                user.getRoles().stream().map(role -> new RoleEntity(role.getId(), role.getName(), role.getDescription())).collect(Collectors.toSet())
+//                : existingUserEntity.getRoles());
 
 //        if (user.getAssignedZones() != null) {
 //            existingUserEntity.setAssignedZones(

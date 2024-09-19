@@ -26,7 +26,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:9090/api/auth/register"
+				"url": "http://localhost:8081/api/auth/register"
 			},
 			"response": []
 		},
@@ -85,7 +85,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjY0NzQwMywiZXhwIjoxNzI2NjUxMDAzfQ.0WlRZaxZS3eD5deTQ81z6zLtJ7Abn6qdyXU3GOfJ7AU"
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjc0Mzg0NiwiZXhwIjoxNzI2ODMwMjQ2fQ.SVzfh-aMppJddg5ZwWPj7J4giXe5bS7VmhBMKqffGGk"
 					}
 				},
 				"method": "GET",
@@ -102,12 +102,12 @@
 			"response": []
 		},
 		{
-			"name": "user_role",
+			"name": "get_user",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lRWRpdCIsImlhdCI6MTcyNjY0NzU5NiwiZXhwIjoxNzI2NjUxMTk2fQ.lWb-g8rbG0LcyN0lhTfBq921RqrbmQGd_qKej_JS4jc"
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjczMjk4NCwiZXhwIjoxNzI2ODE5Mzg0fQ.YHrjTZszzTfH9CQ2bnE_tREmjJHPEmj0qXrUcpbH6aw"
 					}
 				},
 				"method": "GET",
@@ -119,28 +119,7 @@
 						"disabled": true
 					}
 				],
-				"url": "http://localhost:8081/api/main/admin"
-			},
-			"response": []
-		},
-		{
-			"name": "get_user",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NlIiwiaWF0IjoxNzI2NjQwMDc0LCJleHAiOjE3MjY2NDM2NzR9.6z78UjHwB1YdqUzD-kCH1MNrUAlvfUfKKxHJctRhHLU"
-					}
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NlIiwiaWF0IjoxNzI2NjM2NDE1LCJleHAiOjE3MjY2NDAwMTV9.1SsYt5TP_d8Q4hTQH0IJK6E1sf7ggbJC5WDf02aBHh8 ",
-						"type": "text"
-					}
-				],
-				"url": "http://localhost:8081/api/users/b98d872e-8ec6-4222-a321-eb3cb756e192"
+				"url": "http://localhost:8081/api/users/2a626b0e-4b07-4091-8eb4-d9cb1d731527"
 			},
 			"response": []
 		},
@@ -150,7 +129,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjY0NzQwMywiZXhwIjoxNzI2NjUxMDAzfQ.0WlRZaxZS3eD5deTQ81z6zLtJ7Abn6qdyXU3GOfJ7AU"
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjczMjk4NCwiZXhwIjoxNzI2ODE5Mzg0fQ.YHrjTZszzTfH9CQ2bnE_tREmjJHPEmj0qXrUcpbH6aw"
 					}
 				},
 				"method": "PUT",
@@ -164,14 +143,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"janeEdit\",\n    \"password\": \"password\",\n    \"email\": \"jane@email.com\",\n    \"roles\": [\n            {\n                \"id\": \"cce74265-7fd2-4f7e-a3b9-4dd6deb07e2f\"\n            },\n            {\n                \"id\": \"96f06586-9db1-4a4c-8948-8a4a24122f7e\"\n            }\n        ]\n}",
+					"raw": "{\n    \"username\": \"jane-mg\",\n    \"password\": \"password\",\n    \"email\": \"jane@email.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8081/api/users/b98d872e-8ec6-4222-a321-eb3cb756e192"
+				"url": "http://localhost:8081/api/users/8735600e-5b72-4856-ad77-096a1ad772a2"
 			},
 			"response": []
 		},
@@ -196,6 +175,200 @@
 					}
 				},
 				"url": "http://localhost:9090/api/users/4c893756-2572-4c43-b353-22388923172d"
+			},
+			"response": []
+		},
+		{
+			"name": "assign_role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjcyOTM5NSwiZXhwIjoxNzI2ODE1Nzk1fQ.vHHvFi61P0jKQBIpS9XmiqBvNPkSipykwZ9VcdRke-U"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "2a626b0e-4b07-4091-8eb4-d9cb1d731527",
+							"type": "text"
+						},
+						{
+							"key": "roleName",
+							"value": "MANAGER",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8081/api/admin/assign_role"
+			},
+			"response": []
+		},
+		{
+			"name": "remove_role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjcyOTM5NSwiZXhwIjoxNzI2ODE1Nzk1fQ.vHHvFi61P0jKQBIpS9XmiqBvNPkSipykwZ9VcdRke-U"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "8735600e-5b72-4856-ad77-096a1ad772a2",
+							"type": "text"
+						},
+						{
+							"key": "roleName",
+							"value": "MANAGER",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8081/api/admin/remove_role"
+			},
+			"response": []
+		},
+		{
+			"name": "get_zones",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjc0Mzk5NywiZXhwIjoxNzI2ODMwMzk3fQ.VTY05LO5h59V-yix27QvId3Qab3pqnEMzzfV83LM5rE"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:8081/api/zones"
+			},
+			"response": []
+		},
+		{
+			"name": "assign_zone",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjczMDYwMiwiZXhwIjoxNzI2ODE3MDAyfQ.jsK48Bsw8ajzcAyhOCEZpJyIgeMgPt1imuJcq61BXCE"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "8735600e-5b72-4856-ad77-096a1ad772a2",
+							"type": "text"
+						},
+						{
+							"key": "zoneId",
+							"value": "c17b06b2-a73a-4d0b-82de-7a409b71541b",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8081/api/admin/assign_zone"
+			},
+			"response": []
+		},
+		{
+			"name": "assign_device",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjczMDYwMiwiZXhwIjoxNzI2ODE3MDAyfQ.jsK48Bsw8ajzcAyhOCEZpJyIgeMgPt1imuJcq61BXCE"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "zoneId",
+							"value": "c17b06b2-a73a-4d0b-82de-7a409b71541b",
+							"type": "text"
+						},
+						{
+							"key": "deviceId",
+							"value": "b5fcf53a-c271-460d-9790-36bc0ef1c18f",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost:8081/api/admin/assign_device"
+			},
+			"response": []
+		},
+		{
+			"name": "checkpermission",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lRWRpdCIsImlhdCI6MTcyNjY3MDI4OSwiZXhwIjoxNzI2NzU2Njg5fQ.g2KVOCkZ_e940gj6YB4MPVoWRWU8Rd5T1iKQT_c_nY4"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:8081/api/main/admin"
 			},
 			"response": []
 		}

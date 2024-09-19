@@ -1,7 +1,7 @@
 package com.alco.armapi.application.port.in;
 
+import com.alco.armapi.common.UseCase;
 import com.alco.armapi.domain.model.User;
-
 import java.util.List;
 
 public interface UserUseCase {
