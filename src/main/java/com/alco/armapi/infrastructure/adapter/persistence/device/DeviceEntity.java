@@ -1,39 +1,58 @@
 package com.alco.armapi.infrastructure.adapter.persistence.device;
+
 import com.alco.armapi.common.AuditableEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.sensor.SensorEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
+import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.EqualsAndHashCode;
+import lombok.Data;
+import java.util.List;
+import java.util.UUID;
 import java.io.Serializable;
-import java.util.Set;
 
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)  // Include superclass, AuditableEntity fields
 @Entity
 @Table(name = "devices")
 public class DeviceEntity extends AuditableEntity implements Serializable {
+
     @Id
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)  // Automatically generated UUID
+    private UUID id;   // using UUID directly is more efficient and avoids conversion.
+    //id for internal usage
 
+    @Column(nullable = false)
     private String name;
-    private String batchNo;
-    private String description;
 
-//    @Setter
-//    @ManyToOne
-//    @JoinColumn(name = "zone_id")
-//    private ZoneEntity zone;  // A device belongs to one zone
-    @ManyToMany(mappedBy = "devices")
-    private Set<ZoneEntity> zones;
+    private String batchNo;//identifying number during batch creation of devices
+    private String description; //device name
+    private String type; //example: Gas Detector
+    private String location; //Building or Street in description e.g. Ang Mo Kio Ave 1
+    private double latitude;
+    private double longitude;
 
+    @Column(nullable = false)
+    private String status; //active | inactive
+
+    // Many devices belong to one zone, and referencing the zone's id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "zone_id", referencedColumnName = "id", nullable = false)  // reference to ZoneEntity's 'id' field
+    private ZoneEntity zone;
+
+    // A device can have multiple sensors
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<SensorEntity> sensors;  // A device can have multiple sensors
+    private List<SensorEntity> sensors;
 
-    public void setZone(ZoneEntity zone) {
-        this.zones.add(zone);
+    //A device can have assigned users responsible
+    @OneToMany(mappedBy ="device", cascade =CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserEntity> users;
+
+    // Method called before persisting a new DeviceEntity to set default values
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null) {
+            this.status = "active";  // Default status
+        }
     }
 }

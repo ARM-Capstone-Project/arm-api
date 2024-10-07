@@ -5,19 +5,21 @@ import com.alco.armapi.infrastructure.adapter.persistence.device.DeviceEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.sensorreading.SensorReadingEntity;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+//import org.hibernate.annotations.GenericGenerator;
 
+import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
+@EqualsAndHashCode(callSuper = true)  // Include superclass, AuditableEntity fields
 @Entity
 @Table(name = "sensors")
 public class SensorEntity extends AuditableEntity implements Serializable {
     @Id
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)  // Automatically generated UUID
+    private UUID id;
 
     private String name;
     private String type;
