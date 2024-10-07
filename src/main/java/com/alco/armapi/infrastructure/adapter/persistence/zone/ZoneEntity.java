@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 //import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.UUID;
-
+//import org.hibernate.validator.constraints.UUID;
+import java.util.UUID;
 import java.io.Serializable;
 // import java.util.Collection;
 // import java.util.HashSet;
