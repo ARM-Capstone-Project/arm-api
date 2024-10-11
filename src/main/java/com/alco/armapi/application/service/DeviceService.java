@@ -7,6 +7,7 @@ import com.alco.armapi.application.port.out.DeviceRepositoryPort;
 import com.alco.armapi.domain.model.Device;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import java.util.UUID;
 
 @UseCase
 @Transactional
@@ -20,7 +21,7 @@ public class DeviceService implements DeviceUseCase{
     };
 
     @Override
-    public Device getDeviceById(String id){
+    public Device getDeviceById(UUID id){
         return deviceRepositoryPort.getDeviceById(id);
     };
 
@@ -30,12 +31,12 @@ public class DeviceService implements DeviceUseCase{
     };
 
     @Override
-    public void deleteDevice(String id){
+    public void deleteDevice(UUID id){
         deviceRepositoryPort.deleteDevice(id);
     };
 
     @Override
-    public Device updateDevice(String id, Device device){
+    public Device updateDevice(UUID id, Device device){
         return deviceRepositoryPort.updateDevice(id, device);
     };
 
@@ -55,7 +56,7 @@ public class DeviceService implements DeviceUseCase{
     };
 
     @Override
-    public List<Device> getDeviceByZoneId(String zoneId){
+    public List<Device> getDeviceByZoneId(UUID zoneId){
         return deviceRepositoryPort.findDevicesByZoneId(zoneId);
     };
 }

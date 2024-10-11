@@ -1,7 +1,6 @@
 package com.alco.armapi.application.service;
 
 import java.util.List;
-
 import com.alco.armapi.common.UseCase;
 import com.alco.armapi.application.port.in.SensorUseCase;
 import com.alco.armapi.application.port.out.SensorRepositoryPort;
@@ -40,6 +39,10 @@ public class SensorService implements SensorUseCase{
         return sensorRepositoryPort.updateSensor(id, sensor);
     };
 
+    @Override
+    public List<Sensor> getSensorsByDeviceId(String deviceId){
+        return sensorRepositoryPort.findSensorsByDeviceId(deviceId);
+    };
     @Override
     public List<Sensor> getSensorByStatus(String status){
         return sensorRepositoryPort.findSensorsByStatus(status);

@@ -2,18 +2,19 @@ package com.alco.armapi.application.port.in;
 
 import com.alco.armapi.domain.model.Device;
 import java.util.List;
+import java.util.UUID;
 
 public interface DeviceUseCase {
     
     Device saveDevice(Device device);
 
-    Device getDeviceById(String id);
+    Device getDeviceById(UUID id);
 
     List<Device> getAllDevices();
 
-    void deleteDevice(String id);
+    void deleteDevice(UUID id);
 
-    Device updateDevice(String id, Device device);
+    Device updateDevice(UUID id, Device device);
 
     List<Device> getDeviceByStatus(String status);
 
@@ -21,5 +22,5 @@ public interface DeviceUseCase {
 
     List<Device> getDeviceByType(String type);
 
-    List<Device> getDeviceByZoneId(String zoneId);
+    List<Device> getDeviceByZoneId(UUID zoneId);
 }

@@ -17,6 +17,6 @@ public interface SensorRepository extends JpaRepository<SensorEntity, UUID> {
     // Find all sensors by type
     List<SensorEntity> findByType(String type);
 
-    // Find a specific sensor by name
-    SensorEntity findByName(String name);
+    // Find all sensors by name, name is not distinct value
+    List<SensorEntity> findByName(String name);
 }

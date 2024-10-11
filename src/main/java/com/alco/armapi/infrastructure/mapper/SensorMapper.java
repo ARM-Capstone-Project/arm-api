@@ -8,21 +8,17 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = SensorReadingMapper.class) // Use SensorReadingMapper for SensorReading mappings
+@Mapper(componentModel = "spring")
 public interface SensorMapper {
     SensorMapper INSTANCE = Mappers.getMapper(SensorMapper.class);
 
-    // Map from SensorEntity to Sensor
-    @Mapping(source = "device.id", target = "deviceId") // Map device ID
+    @Mapping(source = "device.id", target = "deviceId")
     Sensor toDomainModel(SensorEntity sensorEntity);
 
-    // Map from Sensor to SensorEntity
-    @Mapping(source = "deviceId", target = "device.id") // Map device ID
+    @Mapping(source = "deviceId", target = "device.id")
     SensorEntity toEntity(Sensor sensor);
 
-    // Map List of SensorEntity to List of Sensor
     List<Sensor> toDomainModelList(List<SensorEntity> sensorEntities);
 
-    // Map List of Sensor to List of SensorEntity
     List<SensorEntity> toEntityList(List<Sensor> sensors);
 }

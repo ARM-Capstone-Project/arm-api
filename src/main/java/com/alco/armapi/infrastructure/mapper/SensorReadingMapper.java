@@ -6,17 +6,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = {SensorMapper.class, DeviceMapper.class}) // Use necessary mappers
+@Mapper(componentModel = "spring")
 public interface SensorReadingMapper {
     SensorReadingMapper INSTANCE = Mappers.getMapper(SensorReadingMapper.class);
 
-    // Map from Entity to Domain model
-    @Mapping(source = "sensor.id", target = "sensorId") // Map sensor ID
-    @Mapping(source = "device.id", target = "deviceId") // Map device ID
+    // Map from SensorReadingEntity to SensorReading
+    @Mapping(source = "sensor.id", target = "sensorId")
+    @Mapping(source = "device.id", target = "deviceId")
     SensorReading toDomainModel(SensorReadingEntity sensorReadingEntity);
 
-    // Map from Domain model to Entity
-    @Mapping(source = "sensorId", target = "sensor.id") // Map sensor ID
-    @Mapping(source = "deviceId", target = "device.id") // Map device ID
+    // Map from SensorReading to SensorReadingEntity
+    @Mapping(source = "sensorId", target = "sensor.id")
+    @Mapping(source = "deviceId", target = "device.id")
     SensorReadingEntity toEntity(SensorReading sensorReading);
 }

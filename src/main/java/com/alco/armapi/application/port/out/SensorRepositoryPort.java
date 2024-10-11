@@ -16,6 +16,8 @@ public interface SensorRepositoryPort {
     
     Sensor updateSensor(String id, Sensor sensor);
     
+    List<Sensor> findSensorsByDeviceId(String deviceId);
+
     List<Sensor> findSensorsByStatus(String status);
     
     List<Sensor> findSensorsByType(String type);

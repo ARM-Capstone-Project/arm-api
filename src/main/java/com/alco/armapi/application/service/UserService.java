@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService implements UserUseCase {
     private final UserRepositoryPort userRepositoryPort;
+    
     @Override
     public User saveUser(User user) {
         return userRepositoryPort.saveUser(user);

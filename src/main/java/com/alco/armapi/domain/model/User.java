@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.List;
 @Getter
 @Setter
 public class User {
@@ -14,4 +15,5 @@ public class User {
     private String email;
     private Set<Role> roles;
     private Set<Zone> zones;
+    private Set<Device> devices;
 }

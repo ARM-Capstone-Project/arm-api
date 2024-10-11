@@ -3,12 +3,16 @@ package com.alco.armapi.infrastructure.adapter.persistence.device;
 import com.alco.armapi.common.AuditableEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.sensor.SensorEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
+//import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneRepository;
 import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Data;
 import java.util.List;
 import java.util.UUID;
+
+//import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.Serializable;
 
 @Data
@@ -55,4 +59,12 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
             this.status = "active";  // Default status
         }
     }
+
+    // public String getIdAsString() {
+    //     return id != null ? id.toString() : null;  // Return UUID as String
+    // }
+    // public void setIdFromString(String idString) {
+    //     this.id = idString != null ? UUID.fromString(idString) : null;  // Convert String to UUID
+    // }
+
 }

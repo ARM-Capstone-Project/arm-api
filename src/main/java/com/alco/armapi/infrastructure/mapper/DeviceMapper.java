@@ -5,29 +5,29 @@ import com.alco.armapi.infrastructure.adapter.persistence.device.DeviceEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
+
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Mapper(uses = {SensorMapper.class, UserMapper.class, ZoneMapper.class}) // Include necessary mappers
+@Mapper(componentModel = "spring", uses = {SensorMapper.class})
 public interface DeviceMapper {
-
     DeviceMapper INSTANCE = Mappers.getMapper(DeviceMapper.class);
 
-    // Map from DeviceEntity to Device
-    @Mapping(source = "zone", target = "zone") // Map ZoneEntity to Zone
-    @Mapping(source = "users", target = "users") // Map UserEntity List to User List
-    @Mapping(source = "sensors", target = "sensors") // Map SensorEntity List to Sensor List
+    @Mapping(source = "zone.id", target="zoneId")
+    @Mapping(target ="users", expression = "java(deviceEntity.getUsers().stream().map(UserEntity::getId).collect(Collectors.toSet()))")
+    @Mapping(source="sensors", target="sensors")
     Device toDomainModel(DeviceEntity deviceEntity);
 
-    // Map from Device to DeviceEntity
-    @Mapping(source = "zone", target = "zone") // Map Zone to ZoneEntity
-    @Mapping(source = "users", target = "users") // Map User List to UserEntity List
-    @Mapping(source = "sensors", target = "sensors") // Map Sensor List to SensorEntity List
+    @Mapping(source = "zoneId", target="zone.id")
+    @Mapping(target ="users", expression = "java(device.getUsers().stream().map(id -> { UserEntity user = new UserEntity(); user.setId(id); return user; }).collect(Collectors.toSet()))")
+    @Mapping(source="sensors", target="sensors")
     DeviceEntity toEntity(Device device);
 
-    // Map List of DeviceEntity to List of Device
     List<Device> toDomainModelList(List<DeviceEntity> deviceEntities);
 
-    // Map List of Device to List of DeviceEntity
     List<DeviceEntity> toEntityList(List<Device> devices);
 }

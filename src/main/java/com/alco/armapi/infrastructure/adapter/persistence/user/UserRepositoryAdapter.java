@@ -94,27 +94,7 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
         existingUserEntity.setUsername(isNotEmpty(user.getUsername()) ? user.getUsername() : existingUserEntity.getUsername());
         existingUserEntity.setEmail(isNotEmpty(user.getEmail()) ? user.getEmail() : existingUserEntity.getEmail());
-        existingUserEntity.setPassword(isNotEmpty(user.getPassword()) ? encoder.encode(user.getPassword()) : existingUserEntity.getPassword());  // Ensure password is encoded if provided
-
-//        existingUserEntity.setRoles(user.getRoles() != null && !user.getRoles().isEmpty() ?
-//                user.getRoles().stream().map(role -> new RoleEntity(role.getId(), role.getName(), role.getDescription())).collect(Collectors.toSet())
-//                : existingUserEntity.getRoles());
-
-//        if (user.getAssignedZones() != null) {
-//            existingUserEntity.setAssignedZones(
-//                    user.getAssignedZones().stream()
-//                            .map(zone -> new ZoneEntity(zone.getZoneId(), zone.getZoneName()))
-//                            .collect(Collectors.toList())
-//            );
-//        }
-//
-//        if (user.getAssignedDevices() != null) {
-//            existingUserEntity.setAssignedDevices(
-//                    user.getAssignedDevices().stream()
-//                            .map(device -> new DeviceEntity(device.getSensorId(), device.getDeviceName()))
-//                            .collect(Collectors.toList())
-//            );
-//        }
+        existingUserEntity.setPassword(isNotEmpty(user.getPassword()) ? encoder.encode(user.getPassword()) : existingUserEntity.getPassword());
 
         UserEntity updatedUserEntity = userRepository.save(existingUserEntity);
         return UserMapper.INSTANCE.toDomainModel(updatedUserEntity);

@@ -24,11 +24,12 @@ public class SensorEntity extends AuditableEntity implements Serializable {
     private String name;
     private String type;
     private String status;
+    private String unit;
 
     @ManyToOne
     @JoinColumn(name = "device_id")
     private DeviceEntity device;  // A sensor belongs to one device
 
-    @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<SensorReadingEntity> sensorReadings;  // A sensor can have multiple readings
+    // @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // private Set<SensorReadingEntity> sensorReadings;  // A sensor can have multiple readings
 }

@@ -3,18 +3,20 @@ package com.alco.armapi.application.port.out;
 import com.alco.armapi.domain.model.Device;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface DeviceRepositoryPort {
-    
+
+    // Method to list all devices
     List<Device> listDevices();
     
-    Device getDeviceById(String deviceId);
+    Device getDeviceById(UUID deviceId);
     
     Device saveDevice(Device device);
     
-    void deleteDevice(String id);
+    void deleteDevice(UUID id);
     
-    Device updateDevice(String id, Device device);
+    Device updateDevice(UUID id, Device device);
     
     List<Device> findDevicesByStatus(String status);
     
@@ -22,5 +24,5 @@ public interface DeviceRepositoryPort {
     
     List<Device> findDevicesByType(String type);
     
-    List<Device> findDevicesByZoneId(String zoneId);
+    List<Device> findDevicesByZoneId(UUID zoneId);
 }

@@ -2,6 +2,7 @@ package com.alco.armapi.infrastructure.adapter.persistence.user;
 
 import com.alco.armapi.common.Auditable;
 import com.alco.armapi.common.AuditableEntity;
+import com.alco.armapi.infrastructure.adapter.persistence.device.DeviceEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import jakarta.persistence.*;
@@ -48,4 +49,7 @@ public class UserEntity extends AuditableEntity implements Serializable {
     public UserEntity() {
 
     }
+
+     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<DeviceEntity> devices;
 }

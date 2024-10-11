@@ -15,6 +15,8 @@ public interface SensorUseCase {
 
     Sensor updateSensor(String id, Sensor sensor);
 
+    List<Sensor> getSensorsByDeviceId(String deviceId);
+
     List<Sensor> getSensorByStatus(String status);
 
     List<Sensor> getSensorByType(String type);

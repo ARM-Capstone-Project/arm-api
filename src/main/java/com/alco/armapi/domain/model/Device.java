@@ -19,6 +19,6 @@ public class Device {
     private double latitude;
     private double longitude;
     private String status;
-    private Zone zone;
+    private UUID zoneId; //bring only id to prevent circular reference in MapStruct
     private List<User> users; // A device can have multiple users assigned
 }
