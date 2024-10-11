@@ -4,6 +4,7 @@ import com.alco.armapi.application.port.in.UserUseCase;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.infrastructure.adapter.payload.request.LoginRequest;
 import com.alco.armapi.infrastructure.adapter.payload.response.AuthResponse;
+import com.alco.armapi.infrastructure.adapter.payload.response.LoginResponse;
 import com.alco.armapi.infrastructure.config.UserAuthenticationUseCase;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
@@ -11,11 +12,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
@@ -29,10 +28,9 @@ public class AuthController {
 
     // Build Login REST API
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest){
-        String token = authenticationUseCase.login(loginRequest);
-        AuthResponse authResponse = new AuthResponse(token);
-        return new ResponseEntity<>(authResponse, HttpStatus.OK);
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
+        LoginResponse loginResponse = authenticationUseCase.login(loginRequest);
+        return ResponseEntity.ok(loginResponse);
     }
 
     @PostMapping(value = "/register")
