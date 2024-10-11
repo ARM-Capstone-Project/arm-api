@@ -1,7 +1,6 @@
 package com.alco.armapi.infrastructure.adapter.api;
 
 import com.alco.armapi.application.port.in.DeviceThresholdUseCase;
-import com.alco.armapi.application.service.DeviceThresholdService;
 import com.alco.armapi.domain.model.DeviceThreshold;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
