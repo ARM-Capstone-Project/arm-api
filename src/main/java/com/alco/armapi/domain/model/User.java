@@ -14,4 +14,6 @@ public class User {
     private String email;
     private Set<Role> roles;
     private Set<Zone> zones;
+
+
 }
