@@ -13,6 +13,7 @@ import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneRepository;
 import com.alco.armapi.infrastructure.mapper.UserMapper;
 import com.alco.armapi.infrastructure.mapper.ZoneMapper;
 import lombok.RequiredArgsConstructor;
+import java.util.UUID;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
@@ -42,7 +43,7 @@ public class AdminRepositoryAdapter implements AdminRepositoryPort {
     }
 
     @Override
-    public User assignZoneToUser(String userId, String zoneId) {
+    public User assignZoneToUser(String userId, UUID zoneId) {
         UserEntity user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         ZoneEntity zone = zoneRepository.findById(zoneId).orElseThrow(() -> new RuntimeException("Zone not found"));
 
@@ -52,7 +53,7 @@ public class AdminRepositoryAdapter implements AdminRepositoryPort {
     }
 
     @Override
-    public Zone assignDeviceToZone(String zoneId, String deviceId) {
+    public Zone assignDeviceToZone(UUID zoneId, UUID deviceId) {
         ZoneEntity zone = zoneRepository.findById(zoneId).orElseThrow(() -> new RuntimeException("Zone not found"));
         DeviceEntity device = deviceRepository.findById(deviceId).orElseThrow(() -> new RuntimeException("Device not found"));
 

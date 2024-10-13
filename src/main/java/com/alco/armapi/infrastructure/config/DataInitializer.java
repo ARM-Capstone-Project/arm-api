@@ -1,7 +1,6 @@
 package com.alco.armapi.infrastructure.config;
 
 import com.alco.armapi.common.Constants;
-import com.alco.armapi.domain.model.User;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleRepository;
 import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;

@@ -6,18 +6,13 @@ import com.alco.armapi.common.PersistenceAdapter;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleRepository;
-import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneRepository;
 import com.alco.armapi.infrastructure.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

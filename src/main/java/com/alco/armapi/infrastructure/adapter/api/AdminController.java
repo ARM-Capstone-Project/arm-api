@@ -5,13 +5,12 @@ import com.alco.armapi.application.port.in.AdminUseCase;
 import com.alco.armapi.common.Constants;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.domain.model.Zone;
-import com.alco.armapi.infrastructure.adapter.payload.request.AssignRoleRequest;
-import com.alco.armapi.infrastructure.adapter.payload.request.LoginRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
@@ -39,7 +38,7 @@ public class AdminController {
     // Assign Zone to User
     @PostMapping("/assign_zone")
     @PreAuthorize("hasAuthority('"+ Constants.ROLE_MANAGER + "') or hasAuthority('"+ Constants.ROLE_ADMIN +"' )")
-    public ResponseEntity<User> assignZoneToUser(@RequestParam String userId, @RequestParam String zoneId) {
+    public ResponseEntity<User> assignZoneToUser(@RequestParam String userId, @RequestParam UUID zoneId) {
         User updatedUser = adminUseCase.assignZoneToUser(userId, zoneId);
         return ResponseEntity.ok(updatedUser); // Return the updated user details
     }
@@ -47,7 +46,7 @@ public class AdminController {
     // Assign Device to Zone
     @PostMapping("/assign_device")
     @PreAuthorize("hasAuthority('"+ Constants.ROLE_MANAGER + "') or hasAuthority('"+ Constants.ROLE_ADMIN +"' )")
-    public ResponseEntity<Zone> assignDeviceToZone(@RequestParam String zoneId, @RequestParam String deviceId) {
+    public ResponseEntity<Zone> assignDeviceToZone(@RequestParam UUID zoneId, @RequestParam UUID deviceId) {
         Zone updatedZone = adminUseCase.assignDeviceToZone(zoneId, deviceId);
         return ResponseEntity.ok(updatedZone); // Return the updated zone details
     }

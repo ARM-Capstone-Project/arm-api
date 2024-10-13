@@ -2,13 +2,13 @@ package com.alco.armapi.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
+import java.util.UUID;
 import java.util.Set;
 
 @Getter
 @Setter
 public class Zone {
-    private String id;
+    private UUID id;
     private String name;
     private double latitude;
     private double longitude;

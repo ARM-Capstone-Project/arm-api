@@ -7,6 +7,7 @@ import com.alco.armapi.domain.model.User;
 import com.alco.armapi.domain.model.Zone;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import java.util.UUID;
 
 @UseCase
 @Transactional
@@ -17,13 +18,13 @@ public class AdminService implements AdminUseCase {
 
 
     @Override
-    public User assignZoneToUser(String userId, String zoneId) {
+    public User assignZoneToUser(String userId, UUID zoneId) {
 
         return adminRepositoryPort.assignZoneToUser(userId,zoneId);
     }
 
     @Override
-    public Zone assignDeviceToZone(String zoneId, String deviceId) {
+    public Zone assignDeviceToZone(UUID zoneId, UUID deviceId) {
 
         return adminRepositoryPort.assignDeviceToZone(zoneId,deviceId);
     }

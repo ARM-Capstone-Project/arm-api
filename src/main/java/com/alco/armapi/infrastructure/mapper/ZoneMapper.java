@@ -1,8 +1,6 @@
 package com.alco.armapi.infrastructure.mapper;
 
-import com.alco.armapi.domain.model.Role;
 import com.alco.armapi.domain.model.Zone;
-import com.alco.armapi.infrastructure.adapter.persistence.role.RoleEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
