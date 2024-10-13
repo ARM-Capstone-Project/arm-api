@@ -8,12 +8,16 @@ import java.util.UUID;
 import java.io.Serializable;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
 @Data
 @EqualsAndHashCode(callSuper = true) 
 @Entity
 @Table(name = "devices")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeviceEntity extends AuditableEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)  // Automatically generated UUID
