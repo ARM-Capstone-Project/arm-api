@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "00f86a00-bc08-440e-b1ae-9961a4c45917",
+		"name": "Zones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36632805"
+	},
+	"item": [
+		{
+			"name": "saveZone",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyODgyMzEzNywiZXhwIjoxNzI4OTA5NTM3fQ.wyeJgDMA8VPS-7SyPEGDA5UbXpUlUTUxk7zGzAwIULg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Zone B\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194,\n  \"radius\": 1000,\n  \"devices\": [\n    {\n      \"id\": \"device1-id\"\n    },\n    {\n      \"id\": \"device2-id\"\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/zones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"zones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllZonesWithDevices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyODgyMzkyMiwiZXhwIjoxNzI4OTEwMzIyfQ.IBXpwxQVGZEEhPniAg6hiGwk4x71zH8tczk1vETp5aQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/zones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"zones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getZoneById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyODgyMzkyMiwiZXhwIjoxNzI4OTEwMzIyfQ.IBXpwxQVGZEEhPniAg6hiGwk4x71zH8tczk1vETp5aQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/zones/39bcfdf9-d86d-4fe9-b9ca-d15c7f327988",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"zones",
+						"39bcfdf9-d86d-4fe9-b9ca-d15c7f327988"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateZone",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyODgyMzkyMiwiZXhwIjoxNzI4OTEwMzIyfQ.IBXpwxQVGZEEhPniAg6hiGwk4x71zH8tczk1vETp5aQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Zone BX\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194,\n  \"radius\": 1000,\n  \"devices\": [\n    {\n      \"id\": \"device1-id\"\n    },\n    {\n      \"id\": \"device2-id\"\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/zones/39bcfdf9-d86d-4fe9-b9ca-d15c7f327988",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"zones",
+						"39bcfdf9-d86d-4fe9-b9ca-d15c7f327988"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteZone",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyODgyMzkyMiwiZXhwIjoxNzI4OTEwMzIyfQ.IBXpwxQVGZEEhPniAg6hiGwk4x71zH8tczk1vETp5aQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/zones/1d2e9b89-4e88-45fe-b397-61f3327b81b2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"zones",
+						"1d2e9b89-4e88-45fe-b397-61f3327b81b2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
