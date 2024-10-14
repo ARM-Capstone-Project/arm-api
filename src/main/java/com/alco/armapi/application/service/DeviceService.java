@@ -40,23 +40,23 @@ public class DeviceService implements DeviceUseCase{
         return deviceRepositoryPort.updateDevice(id, device);
     };
 
-    // @Override
-    // public List<Device> getDeviceByStatus(String status){
-    //     return deviceRepositoryPort.findDevicesByStatus(status);
-    // };
+    @Override
+    public List<Device> getDeviceByStatus(String status){
+        return deviceRepositoryPort.findDevicesByStatus(status);
+    };
 
-    // @Override
-    // public List<Device> getDeviceByLocation(String location){
-    //     return deviceRepositoryPort.findDevicesByLocation(location);
-    // };
+    @Override
+    public List<Device> getDeviceByLocation(String location){
+        return deviceRepositoryPort.findDevicesByLocation(location);
+    };
 
-    // @Override
-    // public List<Device> getDeviceByType(String type){
-    //     return deviceRepositoryPort.findDevicesByLocation(type);
-    // };
+    @Override
+    public List<Device> getDeviceByType(String type){
+        return deviceRepositoryPort.findDevicesByLocation(type);
+    };
 
-    // @Override
-    // public List<Device> getDeviceByZoneId(UUID zoneId){
-    //     return deviceRepositoryPort.findDevicesByZoneId(zoneId);
-    // };
+    @Override
+    public List<Device> getDeviceByZoneId(UUID zoneId){
+        return deviceRepositoryPort.findDevicesByZoneId(zoneId);
+    };
 }

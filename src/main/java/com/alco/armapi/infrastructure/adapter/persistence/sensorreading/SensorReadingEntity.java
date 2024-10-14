@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import java.util.UUID;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,6 +15,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)  // Include superclass, AuditableEntity fields
 @Entity
 @Table(name = "sensor_readings")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SensorReadingEntity extends AuditableEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

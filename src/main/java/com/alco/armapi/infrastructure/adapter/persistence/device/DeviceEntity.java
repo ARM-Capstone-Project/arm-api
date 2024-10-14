@@ -2,11 +2,12 @@ package com.alco.armapi.infrastructure.adapter.persistence.device;
 import com.alco.armapi.common.AuditableEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.sensor.SensorEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
+import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 import jakarta.persistence.*;
 import java.util.UUID;
-
 import java.io.Serializable;
 import java.util.Set;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,9 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
     private String name;
     private String batchNo;
     private String description;
+    private String type; //example: Gas Detector
+    private String location; //Building or Street in description e.g. Ang Mo Kio Ave 1
+    private String tagNo; //user defined device ID
 
     // Many devices belong to one zone, and referencing the zone's id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,7 +40,17 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<SensorEntity> sensors;  // A device can have multiple sensors
 
-    public void setZone(ZoneEntity zone) {
-        this.zone=zone;
-    }
+    // public void setZone(ZoneEntity zone) {
+    //     this.zone=zone;
+    // }
+
+    @Column(nullable = false)
+    private String status;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "devices_users",
+            joinColumns = @JoinColumn(name = "device_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    private List<UserEntity> users;
 }

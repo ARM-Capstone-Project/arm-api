@@ -63,7 +63,7 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     private void assignDefaultRoles(UserEntity newUser) {
         RoleEntity userRole = roleRepository.findByName(Constants.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException(ERROR_ROLE_NOT_FOUND));
-        newUser.setRoles(Set.of(userRole));
+        newUser.setRoles(List.of(userRole));
     }
 
 

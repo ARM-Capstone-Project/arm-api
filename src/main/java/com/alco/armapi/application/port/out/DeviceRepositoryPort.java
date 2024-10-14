@@ -14,11 +14,11 @@ public interface DeviceRepositoryPort {
     
     Device updateDevice(UUID id, Device device);
     
-    // List<Device> findDevicesByStatus(String status);
+    List<Device> findDevicesByStatus(String status);
     
-    // List<Device> findDevicesByLocation(String location);
+    List<Device> findDevicesByLocation(String location);
     
-    // List<Device> findDevicesByType(String type);
+    List<Device> findDevicesByType(String type);
     
-    // List<Device> findDevicesByZoneId(UUID zoneId);    
+    List<Device> findDevicesByZoneId(UUID zoneId);    
 }

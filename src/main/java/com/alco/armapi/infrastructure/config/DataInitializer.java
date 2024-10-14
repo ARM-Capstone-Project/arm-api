@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -45,7 +45,7 @@ public class DataInitializer {
             adminUser.setPassword(passwordEncoder.encode("admin123"));
 
             // Set roles for the admin user
-            Set<RoleEntity> roles = Set.of(
+            List<RoleEntity> roles = List.of(
                     roleRepository.findByName(Constants.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Role ADMIN not found")),
                     roleRepository.findByName(Constants.ROLE_USER).orElseThrow(() -> new RuntimeException("Role USER not found"))
             );

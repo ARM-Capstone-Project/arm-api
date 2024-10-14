@@ -5,7 +5,6 @@ import com.alco.armapi.application.port.out.ZoneRepositoryPort;
 import com.alco.armapi.common.UseCase;
 import com.alco.armapi.domain.model.Zone;
 import jakarta.transaction.Transactional;
-
 import java.util.List;
 
 @UseCase

@@ -1,14 +1,15 @@
 package com.alco.armapi.infrastructure.mapper;
 
 import com.alco.armapi.domain.model.Device;
+import com.alco.armapi.domain.model.Zone;
 import com.alco.armapi.infrastructure.adapter.persistence.device.DeviceEntity;
-
+import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper (uses={ZoneMapper.class})
 public interface DeviceMapper {
     DeviceMapper INSTANCE = Mappers.getMapper(DeviceMapper.class);
 

@@ -13,11 +13,11 @@ public interface DeviceUseCase {
 
     Device updateDevice(UUID id, Device device);
 
-    //List<Device> getDeviceByStatus(String status);
+    List<Device> getDeviceByStatus(String status);
 
-    // List<Device> getDeviceByLocation(String location);
+    List<Device> getDeviceByLocation(String location);
 
-    // List<Device> getDeviceByType(String type);
+    List<Device> getDeviceByType(String type);
 
-    // List<Device> getDeviceByZoneId(UUID zoneId);
+    List<Device> getDeviceByZoneId(UUID zoneId);
 }

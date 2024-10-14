@@ -2,8 +2,10 @@ package com.alco.armapi.infrastructure.adapter.persistence.device;
 
 import com.alco.armapi.application.port.out.DeviceRepositoryPort;
 import com.alco.armapi.infrastructure.mapper.DeviceMapper;
+import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneRepository;
+import com.alco.armapi.infrastructure.adapter.persistence.user.UserRepository;
 import com.alco.armapi.common.PersistenceAdapter;
 import com.alco.armapi.domain.model.Device;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.UUID;
 public class DeviceRepositoryAdapter implements DeviceRepositoryPort{
     private final DeviceRepository deviceRepository;
     private final ZoneRepository zoneRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<Device> listDevices() {
@@ -54,52 +57,66 @@ public class DeviceRepositoryAdapter implements DeviceRepositoryPort{
         existingDeviceEntity.setName(device.getName());
         existingDeviceEntity.setBatchNo(device.getBatchNo());
         existingDeviceEntity.setDescription(device.getDescription());
-        // existingDeviceEntity.setType(device.getType());
-        // existingDeviceEntity.setLocation(device.getLocation());
-        // existingDeviceEntity.setLatitude(device.getLatitude());
-        // existingDeviceEntity.setLongitude(device.getLongitude());
-        // existingDeviceEntity.setStatus(device.getStatus());
+        existingDeviceEntity.setType(device.getType());
+        existingDeviceEntity.setLocation(device.getLocation());
+        existingDeviceEntity.setTagNo(device.getTagNo());
+        existingDeviceEntity.setStatus(device.getStatus());
 
-        // if (device.getZoneId() != null) {
-        //     //UUID zone_id = device.getZone(zoneId);
-        //     ZoneEntity zoneEntity = zoneRepository.findById(device.getZoneId())
-        //             .orElseThrow(() -> new RuntimeException("Zone not found with id: " + device.getZoneId()));
-        //     existingDeviceEntity.setZone(zoneEntity);
+        // if (device.getZone() != null && device.getZone().getId() != null) {
+        //     ZoneEntity zoneEntity = zoneRepository.findById(device.getZone().getId())
+        //         .orElseThrow(() -> new RuntimeException("Zone not found with id: " + device.getZone().getId()));
+
+        //     existingDeviceEntity.setZone(ZoneMapper.INSTANCE::toEntity(zoneEntity);
         // }
+
+        if (device.getZone().getId() != null) {
+            //UUID zone_id = device.getZone(zoneId);
+            ZoneEntity zoneEntity = zoneRepository.findById(device.getZone().getId())
+                    .orElseThrow(() -> new RuntimeException("Zone not found with id: " + device.getZone().getId()));
+            existingDeviceEntity.setZone(zoneEntity);
+        }
+
+        if (device.getUsers() != null && !device.getUsers().isEmpty()) {
+            List<UserEntity> userEntities = device.getUsers().stream()
+                                                            .map(user -> userRepository.findById(user.getId())
+                                                            .orElseThrow(() -> new RuntimeException("User not found with id: " + user.getId())))
+                                                            .collect(Collectors.toList());
+                                                            existingDeviceEntity.setUsers(userEntities);
+        }
 
         DeviceEntity updatedDeviceEntity = deviceRepository.save(existingDeviceEntity);
         return DeviceMapper.INSTANCE.toDomainModel(updatedDeviceEntity);
     }
 
-    // @Override
-    // public List<Device> findDevicesByStatus(String status) {
-    //     List<DeviceEntity> deviceEntities = deviceRepository.findByStatus(status);
-    //     return deviceEntities.stream()
-    //             .map(DeviceMapper.INSTANCE::toDomainModel)
-    //             .collect(Collectors.toList());
-    // }
+    @Override
+    public List<Device> findDevicesByStatus(String status) {
+        List<DeviceEntity> deviceEntities = deviceRepository.findByStatus(status);
+        return deviceEntities.stream()
+                .map(DeviceMapper.INSTANCE::toDomainModel)
+                .collect(Collectors.toList());
+    }
 
-    // @Override
-    // public List<Device> findDevicesByLocation(String location) {
-    //     List<DeviceEntity> deviceEntities = deviceRepository.findByLocation(location);
-    //     return deviceEntities.stream()
-    //             .map(DeviceMapper.INSTANCE::toDomainModel)
-    //             .collect(Collectors.toList());
-    // }
+    @Override
+    public List<Device> findDevicesByLocation(String location) {
+        List<DeviceEntity> deviceEntities = deviceRepository.findByLocation(location);
+        return deviceEntities.stream()
+                .map(DeviceMapper.INSTANCE::toDomainModel)
+                .collect(Collectors.toList());
+    }
 
-    // @Override
-    // public List<Device> findDevicesByType(String type) {
-    //     List<DeviceEntity> deviceEntities = deviceRepository.findByType(type);
-    //     return deviceEntities.stream()
-    //             .map(DeviceMapper.INSTANCE::toDomainModel)
-    //             .collect(Collectors.toList());
-    // }
+    @Override
+    public List<Device> findDevicesByType(String type) {
+        List<DeviceEntity> deviceEntities = deviceRepository.findByType(type);
+        return deviceEntities.stream()
+                .map(DeviceMapper.INSTANCE::toDomainModel)
+                .collect(Collectors.toList());
+    }
 
-    // @Override
-    // public List<Device> findDevicesByZoneId(UUID zoneId) {
-    //     List<DeviceEntity> deviceEntities = deviceRepository.findByZoneId(zoneId);
-    //     return deviceEntities.stream()
-    //             .map(DeviceMapper.INSTANCE::toDomainModel)
-    //             .collect(Collectors.toList());
-    // }
+    @Override
+    public List<Device> findDevicesByZoneId(UUID zoneId) {
+        List<DeviceEntity> deviceEntities = deviceRepository.findByZoneId(zoneId);
+        return deviceEntities.stream()
+                .map(DeviceMapper.INSTANCE::toDomainModel)
+                .collect(Collectors.toList());
+    }
 }
