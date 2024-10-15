@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter

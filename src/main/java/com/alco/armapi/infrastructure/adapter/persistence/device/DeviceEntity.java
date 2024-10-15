@@ -6,7 +6,6 @@ import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 import jakarta.persistence.*;
 import java.util.UUID;
 import java.io.Serializable;
-import java.util.Set;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.AllArgsConstructor;
@@ -38,7 +37,7 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
     private ZoneEntity zone;
 
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<SensorEntity> sensors;  // A device can have multiple sensors
+    private List<SensorEntity> sensors;  // A device can have multiple sensors
 
     // public void setZone(ZoneEntity zone) {
     //     this.zone=zone;
