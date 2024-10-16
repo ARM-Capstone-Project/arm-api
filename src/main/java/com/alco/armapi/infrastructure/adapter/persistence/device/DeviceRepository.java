@@ -16,6 +16,5 @@ public interface DeviceRepository extends JpaRepository<DeviceEntity, UUID> {
     @Query("SELECT d FROM DeviceEntity d WHERE LOWER(d.type) = LOWER(:type)")
     List<DeviceEntity> findByType(String type);
 
-    @Query("SELECT d FROM DeviceEntity d WHERE d.zone.id = :zoneId")
     List<DeviceEntity> findByZoneId(UUID zoneId);
 }
