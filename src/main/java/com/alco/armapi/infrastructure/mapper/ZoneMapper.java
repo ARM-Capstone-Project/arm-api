@@ -10,6 +10,7 @@ import java.util.List;
 public interface ZoneMapper {
     ZoneMapper INSTANCE = Mappers.getMapper(ZoneMapper.class);
 
+    @Mapping(target="users", ignore=true)
     ZoneEntity toEntity(Zone zone);
     
     @Mapping(target = "devices", source = "devices")

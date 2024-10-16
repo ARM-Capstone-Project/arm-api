@@ -62,18 +62,24 @@ public class DeviceRepositoryAdapter implements DeviceRepositoryPort{
         existingDeviceEntity.setTagNo(device.getTagNo());
         existingDeviceEntity.setStatus(device.getStatus());
 
-        // if (device.getZone() != null && device.getZone().getId() != null) {
-        //     ZoneEntity zoneEntity = zoneRepository.findById(device.getZone().getId())
-        //         .orElseThrow(() -> new RuntimeException("Zone not found with id: " + device.getZone().getId()));
-
-        //     existingDeviceEntity.setZone(ZoneMapper.INSTANCE::toEntity(zoneEntity);
-        // }
-
-        if (device.getZone().getId() != null) {
-            //UUID zone_id = device.getZone(zoneId);
-            ZoneEntity zoneEntity = zoneRepository.findById(device.getZone().getId())
-                    .orElseThrow(() -> new RuntimeException("Zone not found with id: " + device.getZone().getId()));
-            existingDeviceEntity.setZone(zoneEntity);
+        if (device.getZoneId() != null) {
+            ZoneEntity newZoneEntity = zoneRepository.findById(device.getZoneId())
+                    .orElseThrow(() -> new RuntimeException("Zone not found with id: " + device.getZoneId()));
+        
+            ZoneEntity currentZone = existingDeviceEntity.getZone();
+            if (currentZone != null) {
+                currentZone.getDevices().remove(existingDeviceEntity);
+            }
+        
+            existingDeviceEntity.setZone(newZoneEntity);
+            newZoneEntity.getDevices().add(existingDeviceEntity);
+        
+        } else {
+            ZoneEntity currentZone = existingDeviceEntity.getZone();
+            if (currentZone != null) {
+                currentZone.getDevices().remove(existingDeviceEntity);
+                existingDeviceEntity.setZone(null);
+            }
         }
 
         if (device.getUsers() != null && !device.getUsers().isEmpty()) {

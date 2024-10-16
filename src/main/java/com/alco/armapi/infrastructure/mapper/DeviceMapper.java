@@ -13,9 +13,11 @@ import org.mapstruct.Mapping;
 public interface DeviceMapper {
     DeviceMapper INSTANCE = Mappers.getMapper(DeviceMapper.class);
 
+    @Mapping(source="zone.id", target="zoneId")
     Device toDomainModel(DeviceEntity deviceEntity);
 
     @Mapping(source="sensors", target="sensors")
+    @Mapping(source="zoneId", target="zone.id")
     DeviceEntity toEntity(Device device);
 
     List<Device> toDomainModelList(List<DeviceEntity> deviceEntities);

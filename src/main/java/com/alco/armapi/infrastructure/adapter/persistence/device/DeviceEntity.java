@@ -32,8 +32,8 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
     private String tagNo; //user defined device ID
 
     // Many devices belong to one zone, and referencing the zone's id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "zone_id", referencedColumnName = "id", nullable = false)  // reference to ZoneEntity's 'id' field
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "zone_id", referencedColumnName = "id", nullable = true)  // reference to ZoneEntity's 'id' field
     private ZoneEntity zone;
 
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -52,4 +52,12 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
     private List<UserEntity> users;
+
+    // Method called before persisting a new DeviceEntity to set default values
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null) {
+            this.status = "active";  // Default status
+        }
+    }
 }
