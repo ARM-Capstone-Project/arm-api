@@ -4,8 +4,10 @@ spring:
       on-profile: dev
   datasource:
     url: jdbc:postgresql://localhost:5432/armDB
-    username: postgres
-    password: admin123
+    username: admin
+    password: admin
+    # username: postgres
+    # password: admin123
 
 server:
   error:
