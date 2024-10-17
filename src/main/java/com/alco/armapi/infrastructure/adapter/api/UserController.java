@@ -44,5 +44,4 @@ public class UserController {
         User updatedUser = userUseCase.updateUser(id, user);
         return ResponseEntity.ok(updatedUser);
     }
-
 }

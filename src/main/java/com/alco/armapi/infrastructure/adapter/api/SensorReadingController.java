@@ -1,6 +1,7 @@
 package com.alco.armapi.infrastructure.adapter.api;
 
 
+
 import com.alco.armapi.application.port.in.DeviceSensorReadingUseCase;
 
 import com.alco.armapi.domain.model.readings.DeviceSensorReading;
@@ -65,4 +66,5 @@ public class SensorReadingController {
     }
 
 }
+
 

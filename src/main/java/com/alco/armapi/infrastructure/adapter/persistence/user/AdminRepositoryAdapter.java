@@ -16,6 +16,7 @@ import com.alco.armapi.infrastructure.mapper.AssignmentMapper;
 import com.alco.armapi.infrastructure.mapper.UserMapper;
 import com.alco.armapi.infrastructure.mapper.ZoneMapper;
 import lombok.RequiredArgsConstructor;
+import java.util.UUID;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +49,8 @@ public class AdminRepositoryAdapter implements AdminRepositoryPort {
         return UserMapper.INSTANCE.toDomainModel(user);
     }
 
-    @Override
+
+
     public AssignmentEntity assignOperatorToManager(String managerId, String operatorId) {
         UserEntity manager = userRepository.findById(managerId).orElseThrow(() -> new RuntimeException("User not found"));
         UserEntity operator = userRepository.findById(operatorId).orElseThrow(() -> new RuntimeException("User not found"));
@@ -72,7 +74,7 @@ public class AdminRepositoryAdapter implements AdminRepositoryPort {
     }
 
     @Override
-    public User assignZoneToUser(String userId, String zoneId) {
+    public User assignZoneToUser(String userId, UUID zoneId) {
         UserEntity user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         ZoneEntity zone = zoneRepository.findById(zoneId).orElseThrow(() -> new RuntimeException("Zone not found"));
 
@@ -82,7 +84,7 @@ public class AdminRepositoryAdapter implements AdminRepositoryPort {
     }
 
     @Override
-    public Zone assignDeviceToZone(String zoneId, String deviceId) {
+    public Zone assignDeviceToZone(UUID zoneId, UUID deviceId) {
         ZoneEntity zone = zoneRepository.findById(zoneId).orElseThrow(() -> new RuntimeException("Zone not found"));
         DeviceEntity device = deviceRepository.findById(deviceId).orElseThrow(() -> new RuntimeException("Device not found"));
 

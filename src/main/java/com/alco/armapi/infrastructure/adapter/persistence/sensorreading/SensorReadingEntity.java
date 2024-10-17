@@ -3,22 +3,24 @@ package com.alco.armapi.infrastructure.adapter.persistence.sensorreading;
 import com.alco.armapi.common.AuditableEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.sensor.SensorEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-
+import java.util.UUID;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)  // Include superclass, AuditableEntity fields
 @Entity
 @Table(name = "sensor_readings")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SensorReadingEntity extends AuditableEntity implements Serializable {
     @Id
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     private LocalDateTime timestamp;
     private double value;

@@ -2,7 +2,6 @@ package com.alco.armapi.infrastructure.adapter.api;
 
 
 import com.alco.armapi.common.Constants;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

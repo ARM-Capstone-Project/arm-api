@@ -6,9 +6,9 @@ import com.alco.armapi.domain.model.Zone;
 import com.alco.armapi.infrastructure.mapper.ZoneMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.UUID;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
@@ -33,19 +33,22 @@ public class ZoneRepositoryAdapter implements ZoneRepositoryPort {
     }
 
     @Override
-    public Zone getZoneById(String zoneId) {
+    public Zone getZoneById(UUID zoneId) {
+
         ZoneEntity zoneEntity = zoneRepository.findById(zoneId)
                 .orElseThrow(() -> new RuntimeException("Zone not found with id: " + zoneId));
         return ZoneMapper.INSTANCE.toDomainModel(zoneEntity);
     }
 
     @Override
-    public void deleteZone(String id) {
+    public void deleteZone(UUID id) {
+
         zoneRepository.deleteById(id);
     }
 
     @Override
-    public Zone updateZone(String id, Zone zone) {
+    public Zone updateZone(UUID id, Zone zone) {
+
         ZoneEntity existingZoneEntity = zoneRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Zone not found with id: " + id));
 

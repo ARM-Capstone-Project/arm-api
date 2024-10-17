@@ -7,9 +7,9 @@ import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "users")
@@ -29,7 +29,7 @@ public class UserEntity extends AuditableEntity implements Serializable {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private Set<RoleEntity> roles;
+    private List<RoleEntity> roles;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -37,7 +37,7 @@ public class UserEntity extends AuditableEntity implements Serializable {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "zone_id", referencedColumnName = "id")
     )
-    private Set<ZoneEntity> zones; // User can have multiple zones
+    private List<ZoneEntity> zones; // User can have multiple zones
 
     public UserEntity(String username, String email, String password) {
         this.username = username;

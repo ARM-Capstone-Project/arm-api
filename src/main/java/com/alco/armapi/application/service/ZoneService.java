@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @UseCase
 @Transactional
@@ -26,17 +27,21 @@ public class ZoneService implements ZoneUseCase {
     }
 
     @Override
-    public Zone getZoneById(String id) {
+
+    public Zone getZoneById(UUID id) {
+
         return zoneRepositoryPort.getZoneById(id);
     }
 
     @Override
-    public Zone updateZone(String id, Zone zone) {
+    public Zone updateZone(UUID id, Zone zone) {
+
         return zoneRepositoryPort.updateZone(id, zone);
     }
 
     @Override
-    public void deleteZone(String id) {
+
+    public void deleteZone(UUID id) {
         zoneRepositoryPort.deleteZone(id);
     }
 }
