@@ -1,58 +1,70 @@
 package com.alco.armapi.infrastructure.adapter.api;
 
+
+
+import com.alco.armapi.application.port.in.DeviceSensorReadingUseCase;
+
+import com.alco.armapi.domain.model.readings.DeviceSensorReading;
+import com.alco.armapi.util.DHT22DataGenerator;
+import com.alco.armapi.util.MethaneDataGenerator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import com.alco.armapi.application.port.in.SensorReadingUseCase;
-import com.alco.armapi.domain.model.SensorReading;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@Slf4j
 @RestController
-@RequestMapping("/api/reading")
+@RequestMapping("/api/sensor-readings")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*") // Allow all origins
 public class SensorReadingController {
-    
-    @Autowired
-    private SensorReadingUseCase sensorReadingUseCase;
 
-    @GetMapping("/{sensorId}")
-    public ResponseEntity<SensorReading> getSensorReadingById(@PathVariable UUID sensorId) {
-        SensorReading sensorReading = sensorReadingUseCase.getSensorReadingById(sensorId);
-        return ResponseEntity.ok(sensorReading);
+    private  final DeviceSensorReadingUseCase deviceSensorReadingUseCase;
+
+    @PostMapping()
+    public ResponseEntity<String> createSensorReading(@RequestBody DeviceSensorReading deviceSensorReading) {
+        log.info("Creating device threshold: {}", deviceSensorReading);
+        deviceSensorReadingUseCase.save(deviceSensorReading);
+        return ResponseEntity.ok("SensorReading saved successfully");
     }
 
-    @GetMapping("/{sensorId}/period")
-    public ResponseEntity<List<SensorReading>> getSensorReadingsForPeriod(
-        @PathVariable UUID sensorId,
-        @RequestParam("start") String startDate,
-        @RequestParam("end") String endDate
-    ) {        
-        LocalDateTime start = LocalDateTime.parse(startDate);  // Parse date from query param
-        LocalDateTime end = LocalDateTime.parse(endDate);      // Parse date from query param
-        List<SensorReading> readings = sensorReadingUseCase.getSensorReadingsForPeriod(sensorId, start, end);
-        return ResponseEntity.ok(readings);
+    @GetMapping()
+    public ResponseEntity<List<DeviceSensorReading>> getAllSensorReadings() {
+        log.info("Fetching all sensor reading");
+        List<DeviceSensorReading> thresholds = deviceSensorReadingUseCase.findAll();
+        return ResponseEntity.ok(thresholds);
     }
 
-    //to use with period, by default set for 1 month data
-    @GetMapping("/{sensorId}/all")
-    public ResponseEntity<List<SensorReading>> getReadingsBySensorId(@PathVariable UUID sensorId) {
-        List<SensorReading> sensorReadings = sensorReadingUseCase.getReadingsBySensorId(sensorId);
-        return ResponseEntity.ok(sensorReadings);
+    @GetMapping("/by-device-id/{deviceId}")
+    public ResponseEntity<List<DeviceSensorReading>> getByDeviceId(@PathVariable String deviceId) {
+        log.info("Fetching sensor reading for deviceId: {}", deviceId);
+        List<DeviceSensorReading> thresholds = deviceSensorReadingUseCase.findByDeviceId(deviceId);
+        return ResponseEntity.ok(thresholds);
     }
 
-    //recent 24hours readings
-    @GetMapping("/recent")
-    public ResponseEntity<List<SensorReading>> getAllSensorReadingsInPeriod() {
-        LocalDateTime end = LocalDateTime.now();
-        LocalDateTime start = end.minusHours(24);
-        List<SensorReading> sensorReadings = sensorReadingUseCase.getAllSensorReadingsInPeriod(start, end);
-        return ResponseEntity.ok(sensorReadings);
+    @DeleteMapping("/all")
+    public ResponseEntity<String> deleteAllSensorReadings() {
+        log.info("Deleting all sensor reading");
+        deviceSensorReadingUseCase.deleteAll();
+        return ResponseEntity.ok("All SensorReadings deleted successfully");
     }
+
+    @PostMapping("/saveDHT22")
+    public ResponseEntity<String> saveDHT22() {
+        log.info("Creating DHT22 sensor reading test data");
+        deviceSensorReadingUseCase.saveList(DHT22DataGenerator.get());
+        return ResponseEntity.ok("DHT22 Sensor Readings saved successfully");
+    }
+
+    @PostMapping("/saveMethane")
+    public ResponseEntity<String> saveMethaneSensorReadingTest() {
+        log.info("Creating Methane sensor reading test data");
+        deviceSensorReadingUseCase.saveList(MethaneDataGenerator.get());
+        return ResponseEntity.ok("Methane Sensor Readings saved successfully");
+    }
+
 }
+
+

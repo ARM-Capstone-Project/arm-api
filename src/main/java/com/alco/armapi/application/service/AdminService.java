@@ -5,9 +5,12 @@ import com.alco.armapi.application.port.out.AdminRepositoryPort;
 import com.alco.armapi.common.UseCase;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.domain.model.Zone;
+import com.alco.armapi.infrastructure.adapter.persistence.assignment.AssignmentEntity;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import java.util.UUID;
+
+import java.util.List;
 
 @UseCase
 @Transactional
@@ -37,6 +40,16 @@ public class AdminService implements AdminUseCase {
     @Override
     public User removeRoleFromUser(String userId, String roleName) {
         return adminRepositoryPort.removeRoleFromUser(userId,roleName);
+    }
+
+    @Override
+    public AssignmentEntity assignOperatorToManager(String manager, String operator) {
+        return adminRepositoryPort.assignOperatorToManager(manager,operator);
+    }
+
+    @Override
+    public List<User> getOperatorsByManagerId(String managerId) {
+        return adminRepositoryPort.getOperatorsByManagerId(managerId);
     }
 
 

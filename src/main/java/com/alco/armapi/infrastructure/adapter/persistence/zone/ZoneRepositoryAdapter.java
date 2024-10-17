@@ -34,6 +34,7 @@ public class ZoneRepositoryAdapter implements ZoneRepositoryPort {
 
     @Override
     public Zone getZoneById(UUID zoneId) {
+
         ZoneEntity zoneEntity = zoneRepository.findById(zoneId)
                 .orElseThrow(() -> new RuntimeException("Zone not found with id: " + zoneId));
         return ZoneMapper.INSTANCE.toDomainModel(zoneEntity);
@@ -41,11 +42,13 @@ public class ZoneRepositoryAdapter implements ZoneRepositoryPort {
 
     @Override
     public void deleteZone(UUID id) {
+
         zoneRepository.deleteById(id);
     }
 
     @Override
     public Zone updateZone(UUID id, Zone zone) {
+
         ZoneEntity existingZoneEntity = zoneRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Zone not found with id: " + id));
 

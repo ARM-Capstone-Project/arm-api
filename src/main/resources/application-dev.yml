@@ -4,9 +4,17 @@ spring:
       on-profile: dev
   datasource:
     url: jdbc:postgresql://localhost:5432/armDB
-    username: admin
-    password: admin
+    username: postgres
+    password: admin123
 
 server:
   error:
     path: /error
+
+
+aws:
+  accessKeyId:
+  secretKey:
+  region:
+  dynamodb:
+    endpoint:

@@ -25,20 +25,26 @@ public class ZoneController {
         return ResponseEntity.ok(createdZone);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Zone> getZoneById(@PathVariable UUID id) {
+   @GetMapping("/{id}")
+  public ResponseEntity<Zone> getZoneById(@PathVariable UUID id) {
+
         Zone zone = zoneUseCase.getZoneById(id);
         return ResponseEntity.ok(zone);
     }
 
     @PutMapping("/{id}")
+
     public ResponseEntity<Zone> updateZone(@PathVariable UUID id, @RequestBody Zone zone) {
+
+
         Zone updatedZone = zoneUseCase.updateZone(id, zone);
         return ResponseEntity.ok(updatedZone);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteZone(@PathVariable UUID id) {
+public ResponseEntity<Void> deleteZone(@PathVariable UUID id) {
+
+
         zoneUseCase.deleteZone(id);
         return ResponseEntity.noContent().build();
     }
