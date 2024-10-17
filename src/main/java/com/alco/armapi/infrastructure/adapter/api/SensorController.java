@@ -68,4 +68,10 @@ public class SensorController {
         List<Sensor> sensors = sensorUseCase.getSensorByName(name);
         return ResponseEntity.ok(sensors);
     }
+
+    @GetMapping("/device/{deviceId}")
+    public ResponseEntity<List<Sensor>> getSensorsByDeviceId(@PathVariable UUID deviceId){
+        List<Sensor> sensors = sensorUseCase.getSensorsByDeviceId(deviceId);
+        return ResponseEntity.ok(sensors);
+    };
 }
