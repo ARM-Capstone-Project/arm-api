@@ -1,7 +1,11 @@
 package com.alco.armapi.infrastructure.adapter.api;
 
 import com.alco.armapi.application.port.in.DeviceUseCase;
+import com.alco.armapi.application.port.in.SensorUseCase;
 import com.alco.armapi.domain.model.Device;
+import com.alco.armapi.domain.model.Sensor;
+import com.alco.armapi.infrastructure.adapter.persistence.sensor.SensorEntity;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +20,25 @@ public class DeviceController {
     @Autowired
     private DeviceUseCase deviceUseCase;
 
+    @Autowired
+    private SensorUseCase sensorUseCase;
+
     //create
     @PostMapping
     public ResponseEntity<Device> createDevice(@RequestBody Device device) {
         Device savedDevice = deviceUseCase.saveDevice(device);
+
+        if (device.getSensors() != null && !device.getSensors().isEmpty()) {
+        for (Sensor sensorNew : device.getSensors()) {
+            Sensor sensor = new Sensor();
+            sensor.setName(sensorNew.getName());
+            sensor.setType(sensorNew.getType());
+            sensor.setStatus(sensorNew.getStatus());
+            sensor.setUnit(sensorNew.getUnit());
+            sensor.setDevice(savedDevice);
+            sensorUseCase.saveSensor(sensor);
+        }
+    }
         return ResponseEntity.ok(savedDevice);
     }
 

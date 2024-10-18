@@ -14,8 +14,9 @@ public interface DeviceMapper {
     @Mapping(source="zone.id", target="zoneId")
     Device toDomainModel(DeviceEntity deviceEntity);
 
-    @Mapping(source="sensors", target="sensors")
-    @Mapping(source="zoneId", target="zone.id")
+    @Mapping(target="sensors", ignore=true)
+    //did not map zoneId since mapstruct is creating random zoneId though input is null or empty
+    //@Mapping(source = "zoneId", target = "zone.id", conditionExpression = "java(device.getZoneId() != null && !device.getZoneId().equals(java.util.UUID.fromString(\"00000000-0000-0000-0000-000000000000\")))")
     DeviceEntity toEntity(Device device);
 
     List<Device> toDomainModelList(List<DeviceEntity> deviceEntities);

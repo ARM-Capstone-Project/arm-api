@@ -30,7 +30,7 @@ public class SensorEntity extends AuditableEntity implements Serializable {
     private String unit;
 
     @ManyToOne
-    @JoinColumn(name = "device_id")
+    @JoinColumn(name = "device_id", nullable = true)
     private DeviceEntity device;  // A sensor belongs to one device
 
     @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
