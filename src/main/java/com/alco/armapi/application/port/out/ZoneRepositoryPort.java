@@ -7,9 +7,6 @@ import java.util.UUID;
 
 public interface ZoneRepositoryPort {
 
-
-
-
     Zone saveZone(Zone zone);
 
     List<Zone> listZones();

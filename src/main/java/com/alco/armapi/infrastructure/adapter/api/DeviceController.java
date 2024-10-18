@@ -4,7 +4,6 @@ import com.alco.armapi.application.port.in.DeviceUseCase;
 import com.alco.armapi.application.port.in.SensorUseCase;
 import com.alco.armapi.domain.model.Device;
 import com.alco.armapi.domain.model.Sensor;
-import com.alco.armapi.infrastructure.adapter.persistence.sensor.SensorEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

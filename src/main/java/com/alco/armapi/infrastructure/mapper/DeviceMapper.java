@@ -12,6 +12,7 @@ public interface DeviceMapper {
     DeviceMapper INSTANCE = Mappers.getMapper(DeviceMapper.class);
 
     @Mapping(source="zone.id", target="zoneId")
+    @Mapping(target="sensors", ignore=true)
     Device toDomainModel(DeviceEntity deviceEntity);
 
     @Mapping(target="sensors", ignore=true)
