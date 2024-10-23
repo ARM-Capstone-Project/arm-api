@@ -2,6 +2,7 @@ package com.alco.armapi.application.port.in;
 
 import com.alco.armapi.common.UseCase;
 import com.alco.armapi.domain.model.readings.DeviceSensorReading;
+import com.alco.armapi.domain.model.readings.ReadingDevice;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface DeviceSensorReadingUseCase {
     void deleteAll();
     List<DeviceSensorReading> findByDeviceId(String deviceId);
     void saveList(List<DeviceSensorReading> deviceSensorReadings);
+    
+    List<ReadingDevice> getDeviceFromReading();
 }

@@ -3,14 +3,12 @@ package com.alco.armapi.infrastructure.adapter.api;
 import com.alco.armapi.application.port.in.UserUseCase;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.infrastructure.adapter.payload.request.LoginRequest;
-import com.alco.armapi.infrastructure.adapter.payload.response.AuthResponse;
 import com.alco.armapi.infrastructure.adapter.payload.response.LoginResponse;
 import com.alco.armapi.infrastructure.config.UserAuthenticationUseCase;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

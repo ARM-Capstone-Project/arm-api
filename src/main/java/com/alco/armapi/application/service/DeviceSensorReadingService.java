@@ -5,6 +5,8 @@ import com.alco.armapi.application.port.out.DeviceSensorReadingRepositoryPort;
 
 import com.alco.armapi.common.UseCase;
 import com.alco.armapi.domain.model.readings.DeviceSensorReading;
+import com.alco.armapi.domain.model.readings.ReadingDevice;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -47,4 +49,9 @@ public class DeviceSensorReadingService implements DeviceSensorReadingUseCase {
     public void saveList(List<DeviceSensorReading> deviceSensorReadings) {
          deviceSensorReadingRepositoryPort.saveList(deviceSensorReadings);
     }
+
+    @Override
+    public List<ReadingDevice> getDeviceFromReading(){
+        return deviceSensorReadingRepositoryPort.getDeviceFromReading();
+    };
 }

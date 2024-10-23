@@ -2,12 +2,15 @@ package com.alco.armapi.infrastructure.adapter.api;
 
 import com.alco.armapi.application.port.in.DeviceUseCase;
 import com.alco.armapi.application.port.in.SensorUseCase;
+import com.alco.armapi.application.port.in.DeviceSensorReadingUseCase;
 import com.alco.armapi.domain.model.Device;
 import com.alco.armapi.domain.model.Sensor;
+import com.alco.armapi.domain.model.readings.ReadingDevice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,24 +25,34 @@ public class DeviceController {
     @Autowired
     private SensorUseCase sensorUseCase;
 
+    @Autowired
+    private DeviceSensorReadingUseCase deviceSensorReadingUseCase;
+
     //create
     @PostMapping
-    public ResponseEntity<Device> createDevice(@RequestBody Device device) {
-        Device savedDevice = deviceUseCase.saveDevice(device);
-
+public ResponseEntity<Device> createDevice(@RequestBody Device device) {
+    Device savedDevice = deviceUseCase.saveDevice(device);
+    try {
         if (device.getSensors() != null && !device.getSensors().isEmpty()) {
-        for (Sensor sensorNew : device.getSensors()) {
-            Sensor sensor = new Sensor();
-            sensor.setName(sensorNew.getName());
-            sensor.setType(sensorNew.getType());
-            sensor.setStatus(sensorNew.getStatus());
-            sensor.setUnit(sensorNew.getUnit());
-            sensor.setDevice(savedDevice);
-            sensorUseCase.saveSensor(sensor);
+            for (Sensor sensorNew : device.getSensors()) {
+                Sensor sensor = new Sensor();
+                sensor.setName(sensorNew.getName());
+                sensor.setType(sensorNew.getType());
+                sensor.setStatus(sensorNew.getStatus());
+                sensor.setUnit(sensorNew.getUnit());
+                sensor.setDevice(savedDevice);
+
+                sensorUseCase.saveSensor(sensor);
+            }
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-        return ResponseEntity.ok(savedDevice);
-    }
+
+    return ResponseEntity.ok(savedDevice);
+}
+
 
     //delete
     @DeleteMapping("/{id}")
@@ -90,6 +103,12 @@ public class DeviceController {
     @GetMapping("/zone/{zoneId}")
     public ResponseEntity<List<Device>> getDevicesByZoneId(@PathVariable UUID zoneId) {
         List<Device> devices = deviceUseCase.getDeviceByZoneId(zoneId);
+        return ResponseEntity.ok(devices);
+    }
+
+    @GetMapping("/new")
+    public ResponseEntity<List<ReadingDevice>> getNewDevicesFromReading() {
+        List<ReadingDevice> devices = deviceSensorReadingUseCase.getDeviceFromReading();
         return ResponseEntity.ok(devices);
     }
 }

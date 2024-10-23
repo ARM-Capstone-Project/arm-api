@@ -7,10 +7,6 @@ import com.alco.armapi.common.Constants;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.domain.model.Zone;
 
-import com.alco.armapi.infrastructure.adapter.payload.request.AssignRoleRequest;
-import com.alco.armapi.infrastructure.adapter.payload.request.LoginRequest;
-import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
-
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

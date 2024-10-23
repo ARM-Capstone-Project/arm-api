@@ -3,7 +3,9 @@ package com.alco.armapi.infrastructure.adapter.persistence.readings;
 import com.alco.armapi.application.port.out.DeviceSensorReadingRepositoryPort;
 import com.alco.armapi.common.PersistenceAdapter;
 import com.alco.armapi.domain.model.readings.DeviceSensorReading;
+import com.alco.armapi.domain.model.readings.ReadingDevice;
 import com.alco.armapi.infrastructure.mapper.DeviceSensorReadingMapper;
+import com.alco.armapi.infrastructure.mapper.ReadingDeviceMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -47,4 +49,10 @@ public class DeviceSensorReadingAdapter  implements DeviceSensorReadingRepositor
         deviceSensorReadingRepository.batchSave(deviceSensorReadings.stream().map(DeviceSensorReadingMapper.INSTANCE::toEntity)
                 .collect(Collectors.toList()));
     }
+
+    public List<ReadingDevice> getDeviceFromReading(){
+        return deviceSensorReadingRepository.getDeviceFromReading().stream()
+                .map(ReadingDeviceMapper.INSTANCE::toDomainModel)
+                .collect(Collectors.toList());
+    };
 }

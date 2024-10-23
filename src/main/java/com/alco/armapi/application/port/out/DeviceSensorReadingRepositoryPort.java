@@ -1,6 +1,8 @@
 package com.alco.armapi.application.port.out;
 
 import com.alco.armapi.domain.model.readings.DeviceSensorReading;
+import com.alco.armapi.domain.model.readings.ReadingDevice;
+
 import java.util.List;
 
 public interface DeviceSensorReadingRepositoryPort {
@@ -10,4 +12,6 @@ public interface DeviceSensorReadingRepositoryPort {
     void deleteAll();
     List<DeviceSensorReading> findByDeviceId(String deviceId);
     void saveList(List<DeviceSensorReading> deviceSensorReadings);
+
+    List<ReadingDevice> getDeviceFromReading();
 }

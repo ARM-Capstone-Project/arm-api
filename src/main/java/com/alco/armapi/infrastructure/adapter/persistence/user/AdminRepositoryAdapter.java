@@ -12,7 +12,6 @@ import com.alco.armapi.infrastructure.adapter.persistence.role.RoleEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.role.RoleRepository;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneRepository;
-import com.alco.armapi.infrastructure.mapper.AssignmentMapper;
 import com.alco.armapi.infrastructure.mapper.UserMapper;
 import com.alco.armapi.infrastructure.mapper.ZoneMapper;
 import lombok.RequiredArgsConstructor;

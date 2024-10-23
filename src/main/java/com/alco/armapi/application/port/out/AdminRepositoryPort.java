@@ -6,7 +6,6 @@ import com.alco.armapi.domain.model.Zone;
 import java.util.UUID;
 
 import com.alco.armapi.infrastructure.adapter.persistence.assignment.AssignmentEntity;
-import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 
 import java.util.List;
 

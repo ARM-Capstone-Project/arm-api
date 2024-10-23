@@ -37,7 +37,6 @@ public class DeviceThresholdRepository {
         }
     }
 
-
     public List<DeviceThresholdDocument> findByDeviceId(String deviceId) {
         DeviceThresholdDocument deviceThreshold = new DeviceThresholdDocument();
         deviceThreshold.setDeviceId(deviceId);

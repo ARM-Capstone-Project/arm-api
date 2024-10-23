@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
+import java.util.Date;
 
 @Slf4j
 @Repository
@@ -76,6 +77,30 @@ public class DeviceSensorReadingRepository {
             log.error(BATCH_SAVE_FAILED + " {}", e.getMessage());
         }
     }
+
+    //get distinct device from latest readings
+    public List<DeviceFromReadings> getDeviceFromReading() {
+    List<DeviceSensorReadingDocument> allReadings = findAll();
+
+    // Group by deviceId and find the latest reading for each device
+    Map<String, DeviceSensorReadingDocument> latestReading = new HashMap<>();
+
+    for (DeviceSensorReadingDocument reading : allReadings) {
+        String deviceId = reading.getDeviceId();
+        Date currentTimestamp = reading.getTimestamp();
+
+        // Check if this deviceId already has an entry or if the current entry has a later timestamp
+        if (!latestReading.containsKey(deviceId) || 
+            currentTimestamp.after(latestReading.get(deviceId).getTimestamp())) {
+                latestReading.put(deviceId, reading);
+        }
+    }
+
+    // Convert to list of ReadingDevice
+    return latestReading.values().stream()
+        .map(reading -> new DeviceFromReadings(reading.getId(), reading.getDeviceId(), reading.getReadings()))
+        .collect(Collectors.toList());
+}
 
 
 }

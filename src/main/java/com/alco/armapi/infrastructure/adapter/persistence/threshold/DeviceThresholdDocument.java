@@ -38,8 +38,4 @@ public class DeviceThresholdDocument {
 
     @DynamoDBAttribute
     private String unit;
-
-
-
-
 }
