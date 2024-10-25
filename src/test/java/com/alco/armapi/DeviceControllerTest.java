@@ -1,9 +1,12 @@
 package com.alco.armapi;
 
+import com.alco.armapi.application.port.in.DeviceSensorReadingUseCase;
 import com.alco.armapi.application.port.in.DeviceUseCase;
 import com.alco.armapi.application.port.in.SensorUseCase;
 import com.alco.armapi.domain.model.Device;
 import com.alco.armapi.domain.model.Sensor;
+import com.alco.armapi.domain.model.readings.DeviceSensorReading;
+import com.alco.armapi.domain.model.readings.ReadingDevice;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +21,10 @@ import com.alco.armapi.infrastructure.adapter.api.DeviceController;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -35,6 +40,9 @@ class DeviceControllerTest {
     @Mock
     private SensorUseCase sensorUseCase;
 
+    @Mock
+    private DeviceSensorReadingUseCase deviceSensorReadingUseCase;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -48,7 +56,7 @@ class DeviceControllerTest {
 
         ResponseEntity<Device> response = deviceController.createDevice(device);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(device, response.getBody());
         verify(deviceUseCase, times(1)).saveDevice(device);
     }
@@ -79,18 +87,30 @@ class DeviceControllerTest {
     }
 
     @Test
-    void getDeviceById_ShouldReturnDevice() {
-        UUID deviceId = UUID.randomUUID();
-        Device device = new Device();
-        device.setId(deviceId);
-        when(deviceUseCase.getDeviceById(deviceId)).thenReturn(device);
+void getDeviceById_ShouldReturnDevice() {
+    UUID deviceId = UUID.randomUUID();
+    Device device = new Device();
+    device.setId(deviceId);
+    String tagNo = "tag123";
+    device.setTagNo(tagNo);
 
-        ResponseEntity<Device> response = deviceController.getDeviceById(deviceId);
+    when(deviceUseCase.getDeviceById(deviceId)).thenReturn(Optional.of(device));
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(device, response.getBody());
-        verify(deviceUseCase, times(1)).getDeviceById(deviceId);
-    }
+    ReadingDevice readingDevice = new ReadingDevice();
+    readingDevice.setDeviceId(tagNo);
+    readingDevice.setReadings(null);
+
+    when(deviceSensorReadingUseCase.getDeviceFromReading()).thenReturn(List.of(readingDevice));
+
+    ResponseEntity<Device> response = deviceController.getDeviceById(deviceId);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertNotNull(response.getBody(), "Expected device to be returned but got null");
+    assertEquals(device, response.getBody());
+
+    verify(deviceUseCase, times(1)).getDeviceById(deviceId);
+    verify(deviceSensorReadingUseCase, times(1)).getDeviceFromReading();
+}
+
 
     @Test
     void getAllDevices_ShouldReturnDeviceList() {
@@ -185,7 +205,7 @@ void createDevice_ShouldReturnCreatedDevice_WhenNoSensors() {
 
     ResponseEntity<Device> response = deviceController.createDevice(device);
 
-    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertEquals(device, response.getBody());
     verify(deviceUseCase, times(1)).saveDevice(device);
 }

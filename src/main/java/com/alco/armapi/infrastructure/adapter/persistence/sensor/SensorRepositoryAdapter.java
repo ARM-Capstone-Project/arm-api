@@ -55,10 +55,10 @@ public class SensorRepositoryAdapter implements SensorRepositoryPort{
         existingEntity.setStatus(sensor.getStatus());
         existingEntity.setUnit(sensor.getUnit());
 
-        if (sensor.getDevice() != null) {
-            UUID uuid = sensor.getDevice().getId();
+        if (sensor.getDeviceId() != null) {
+            UUID uuid = sensor.getDeviceId();
             DeviceEntity deviceEntity = deviceRepository.findById(uuid)
-                    .orElseThrow(() -> new RuntimeException("Device not found with id: " + sensor.getDevice().getId()));
+                    .orElseThrow(() -> new RuntimeException("Device not found with id: " + sensor.getDeviceId()));
                     existingEntity.setDevice(deviceEntity);
         }
         

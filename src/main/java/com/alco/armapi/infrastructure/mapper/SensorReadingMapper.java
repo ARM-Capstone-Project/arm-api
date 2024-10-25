@@ -1,6 +1,5 @@
 package com.alco.armapi.infrastructure.mapper;
 
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DeviceRepository extends JpaRepository<DeviceEntity, UUID> {
@@ -17,4 +18,6 @@ public interface DeviceRepository extends JpaRepository<DeviceEntity, UUID> {
     List<DeviceEntity> findByType(String type);
 
     List<DeviceEntity> findByZoneId(UUID zoneId);
+
+    Optional<DeviceEntity> getDeviceByTagNo(String tagNo);
 }

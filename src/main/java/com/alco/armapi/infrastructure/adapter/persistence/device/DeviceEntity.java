@@ -6,6 +6,7 @@ import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 import jakarta.persistence.*;
 import java.util.UUID;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.AllArgsConstructor;
@@ -24,10 +25,15 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
     private UUID id;   // using UUID directly is more efficient and avoids conversion.
     //id for internal usage
 
+    @Column(nullable = true)
     private String name;
+    @Column(nullable = true)
     private String batchNo;
+    @Column(nullable = true)
     private String description;
+    @Column(nullable = true)
     private String type; //example: Gas Detector
+    @Column(nullable = true)
     private String location; //Building or Street in description e.g. Ang Mo Kio Ave 1
     private String tagNo; //user defined device ID
 
@@ -37,7 +43,7 @@ public class DeviceEntity extends AuditableEntity implements Serializable {
     private ZoneEntity zone;
 
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SensorEntity> sensors;  // A device can have multiple sensors
+    private List<SensorEntity> sensors= new ArrayList<>();  // A device can have multiple sensors
 
     // public void setZone(ZoneEntity zone) {
     //     this.zone=zone;

@@ -5,7 +5,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.alco.armapi.application.port.in.AdminUseCase;
 import com.alco.armapi.application.port.in.UserUseCase;
 import com.alco.armapi.application.port.in.ZoneUseCase;
-import com.alco.armapi.domain.model.Device;
 import com.alco.armapi.domain.model.User;
 import com.alco.armapi.domain.model.Zone;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,20 +18,15 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.alco.armapi.infrastructure.adapter.api.AdminController;
 import com.alco.armapi.infrastructure.adapter.persistence.assignment.AssignmentEntity;
-import com.alco.armapi.infrastructure.adapter.persistence.user.UserEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.user.UserRepository;
-import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneEntity;
 import com.alco.armapi.infrastructure.adapter.persistence.zone.ZoneRepository;
 
 @SpringBootTest

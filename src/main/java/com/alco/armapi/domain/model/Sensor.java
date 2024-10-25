@@ -13,6 +13,7 @@ public class Sensor {
     private String type;
     private String status;
     private List<SensorReading> sensorReadings;  // A sensor can have multiple readings
-    private Device device;
+    //private Device device;
+    private UUID deviceId;
     private String unit;
 }

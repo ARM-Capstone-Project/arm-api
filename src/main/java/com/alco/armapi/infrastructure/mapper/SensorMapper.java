@@ -13,10 +13,10 @@ import org.mapstruct.Mapping;
 public interface SensorMapper {
     SensorMapper INSTANCE = Mappers.getMapper(SensorMapper.class);
 
-    @Mapping(source = "device", target = "device")
+    @Mapping(source = "device.id", target = "deviceId")
     Sensor toDomainModel(SensorEntity sensorEntity);
 
-    @Mapping(source = "device", target = "device")
+    @Mapping(source = "deviceId", target = "device.id")
     SensorEntity toEntity(Sensor sensor);
 
     List<Sensor> toDomainModelList(List<SensorEntity> sensorEntities);

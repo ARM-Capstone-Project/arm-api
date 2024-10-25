@@ -8,6 +8,7 @@ import com.alco.armapi.domain.model.Device;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import java.util.UUID;
+import java.util.Optional;
 
 @UseCase
 @Transactional
@@ -21,7 +22,7 @@ public class DeviceService implements DeviceUseCase{
     };
 
     @Override
-    public Device getDeviceById(UUID id){
+    public Optional<Device> getDeviceById(UUID id){
         return deviceRepositoryPort.getDeviceById(id);
     };
 
@@ -58,5 +59,10 @@ public class DeviceService implements DeviceUseCase{
     @Override
     public List<Device> getDeviceByZoneId(UUID zoneId){
         return deviceRepositoryPort.findDevicesByZoneId(zoneId);
+    };
+
+    @Override
+    public Device getDeviceByTagNo(String tagNo){
+        return deviceRepositoryPort.getDeviceByTagNo(tagNo);
     };
 }

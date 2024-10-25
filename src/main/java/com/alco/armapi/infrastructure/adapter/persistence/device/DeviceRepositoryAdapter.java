@@ -12,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import java.util.stream.Collectors;
 import java.util.UUID;
+import java.util.Optional;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
@@ -29,11 +30,14 @@ public class DeviceRepositoryAdapter implements DeviceRepositoryPort{
     }
 
     @Override
-    public Device getDeviceById(UUID deviceId) {
+    public Optional<Device> getDeviceById(UUID deviceId) {
         
-        DeviceEntity deviceEntity = deviceRepository.findById(deviceId)
-                .orElseThrow(() -> new RuntimeException("Device not found with id: " + deviceId));
-        return DeviceMapper.INSTANCE.toDomainModel(deviceEntity);
+        // DeviceEntity deviceEntity = deviceRepository.findById(deviceId)
+        //         .orElseThrow(() -> new RuntimeException("Device not found with id: " + deviceId));
+        // return DeviceMapper.INSTANCE.toDomainModel(deviceEntity);
+
+        return deviceRepository.findById(deviceId)
+            .map(DeviceMapper.INSTANCE::toDomainModel);
     }
 
     @Override
@@ -125,4 +129,12 @@ public class DeviceRepositoryAdapter implements DeviceRepositoryPort{
                 .map(DeviceMapper.INSTANCE::toDomainModel)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Device getDeviceByTagNo(String tagNo) {
+    return deviceRepository.getDeviceByTagNo(tagNo)
+        .map(DeviceMapper.INSTANCE::toDomainModel) // mapping
+        .orElse(null); //null if not found
+}
+
 }
